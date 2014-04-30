@@ -216,14 +216,24 @@ public class objReader {
                 
                 if (parts.length > 2)
                 {
-                	tempp.nx = norm.get((short) (Short.parseShort(parts[2])-1)).x;
-                	tempp.ny = norm.get((short) (Short.parseShort(parts[2])-1)).y;
-                	tempp.nz = norm.get((short) (Short.parseShort(parts[2])-1)).z;
+                	if(parts[2].equals(""))
+                	{}
+                	else
+                	{
+                		tempp.nx = norm.get((short) (Short.parseShort(parts[2])-1)).x;
+                		tempp.ny = norm.get((short) (Short.parseShort(parts[2])-1)).y;
+                		tempp.nz = norm.get((short) (Short.parseShort(parts[2])-1)).z;
+                	}
                 }
                 if (parts.length > 1)
                 {
-                	tempp.tx = tex.get((short) (Short.parseShort(parts[1])-1)).x;
-                	tempp.ty = tex.get((short) (Short.parseShort(parts[1])-1)).y;
+                	if(parts[1].equals(""))
+                	{}
+                	else
+                	{
+                		tempp.tx = tex.get((short) (Short.parseShort(parts[1])-1)).x;
+                		tempp.ty = tex.get((short) (Short.parseShort(parts[1])-1)).y;
+                	}
                 }
                 poly.add(tempp);
                 faceIndex++;
@@ -236,14 +246,24 @@ public class objReader {
                 
                 if (parts.length > 2)
                 {
+                	if(parts[2].equals(""))
+                	{}
+                	else
+                	{
                 	tempp2.nx = norm.get((short) (Short.parseShort(parts[2])-1)).x;
                 	tempp2.ny = norm.get((short) (Short.parseShort(parts[2])-1)).y;
                 	tempp2.nz = norm.get((short) (Short.parseShort(parts[2])-1)).z;
+                	}
                 }
                 if (parts.length > 1)
                 {
+                	if(parts[1].equals(""))
+                	{}
+                	else
+                	{
                 	tempp2.tx = tex.get((short) (Short.parseShort(parts[1])-1)).x;
                 	tempp2.ty = tex.get((short) (Short.parseShort(parts[1])-1)).y;
+                	}
                 }
                 poly.add(tempp2);
                 faceIndex++;
@@ -256,14 +276,24 @@ public class objReader {
                 
                 if (parts.length > 2)
                 {
+                	if(parts[2].equals(""))
+                	{}
+                	else
+                	{
                 	tempp3.nx = norm.get((short) (Short.parseShort(parts[2])-1)).x;
                 	tempp3.ny = norm.get((short) (Short.parseShort(parts[2])-1)).y;
                 	tempp3.nz = norm.get((short) (Short.parseShort(parts[2])-1)).z;
+                	}
                 }
                 if (parts.length > 1)
                 {
+                	if(parts[1].equals(""))
+                	{}
+                	else
+                	{
                 	tempp3.tx = tex.get((short) (Short.parseShort(parts[1])-1)).x;
                 	tempp3.ty = tex.get((short) (Short.parseShort(parts[1])-1)).y;
+                	}
                 }
                 poly.add(tempp3);
                 faceIndex++;
@@ -296,12 +326,24 @@ public class objReader {
         {
         	//normalize
         	double length = Math.sqrt((poly.get(x).nx*poly.get(x).nx) +(poly.get(x).ny*poly.get(x).ny) +(poly.get(x).nz*poly.get(x).nz));
-        	normalsSorted[index] = (float) (poly.get(x).nx/length);
-        	index++;
-        	normalsSorted[index] = (float) (poly.get(x).ny/length);
-        	index++;
-        	normalsSorted[index] = (float) (poly.get(x).nz/length);
-        	index++;
+        	if(length == 0)
+        	{
+        		normalsSorted[index] = 0.0f;
+        		index++;
+        		normalsSorted[index] = 0.0f;
+        		index++;
+        		normalsSorted[index] = 0.0f;
+        		index++;
+        	}
+        	else
+        	{
+        		normalsSorted[index] = (float) (poly.get(x).nx/length);
+        		index++;
+        		normalsSorted[index] = (float) (poly.get(x).ny/length);
+        		index++;
+        		normalsSorted[index] = (float) (poly.get(x).nz/length);
+        		index++;
+        	}
         }
         
         
@@ -327,7 +369,9 @@ public class objReader {
 //		models.add(createModelValues("horse12.obj"));
 //		models.add(createModelValues("horse13.obj"));
 //		models.add(createModelValues("horse14.obj"));
-		models.add(createModelValues("crown_victoria.obj"));
+		//models.add(createModelValues("crown_victoria.obj"));
+		//models.add(createModelValues("ring.obj"));
+		models.add(createModelValues("sphere.obj"));
         
 		int totalVert =0,totalNormals=0,totalUV=0;
         try {
